@@ -1,5 +1,8 @@
 version: '4.19.x.{build}'
 
+build:
+  verbosity: minimal
+
 image:
   - Visual Studio 2017
 
@@ -19,8 +22,6 @@ environment:
 shallow_clone: true
 
 test: off
-
-deploy: off
 
 matrix:
   fast_finish: true
@@ -237,3 +238,13 @@ for:
     artifacts:
       - path: 'build\Notepad2*.zip'
         name: Notepad2_Clang_ARM64
+
+deploy:
+- provider: GitHub
+  description: 简体中文版
+  auth_token:
+    secure: JH8j5rsqJnlUw/PE8gu8XrD9FNBlGByqYyfberJRvLeioTzKqTY+58QrwMJGQLzx
+  draft: true
+  prerelease: true
+  on:
+    branch: zh-CN
