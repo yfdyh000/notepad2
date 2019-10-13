@@ -4,7 +4,6 @@ image:
   - Visual Studio 2017
 
 configuration:
-  - Debug
   - Release
 
 platform:
@@ -16,7 +15,6 @@ platform:
 environment:
   matrix:
     - compiler: MSVC
-    - compiler: Clang
 
 shallow_clone: true
 
