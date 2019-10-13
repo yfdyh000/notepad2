@@ -1,5 +1,6 @@
+#define BRANCH _T("zh-CN")
 #define VERSION_MINOR 19
-#define VERSION_BUILD 09
-#define VERSION_HASH TEXT("49d79cc")
-#define VERSION_REV 2380
-#define VERSION_REV_FULL TEXT("r2380 (49d79cc)")
+#define VERSION_BUILD 10
+#define VERSION_HASH TEXT("8abb500")
+#define VERSION_REV 2383
+#define VERSION_REV_FULL TEXT("r2383 (8abb500) (zh-CN) (master@2381)")
