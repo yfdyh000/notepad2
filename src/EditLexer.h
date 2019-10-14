@@ -14,7 +14,7 @@
 #define MAX_LEXER_STYLE_EDIT_SIZE	512
 
 // localization, get lexer and style name from resuorce
-#define NP2_GET_LEXER_STYLE_NAME_FROM_RES	0
+#define NP2_GET_LEXER_STYLE_NAME_FROM_RES	1
 #define MAX_EDITLEXER_NAME_SIZE		128
 #define MAX_EDITSTYLE_NAME_SIZE		128
 
