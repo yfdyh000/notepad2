@@ -1728,50 +1728,50 @@ END
 
 STRINGTABLE
 BEGIN
-	IDS_BACKSLASHHELP		"Backslash Transformations\n\n\
+	IDS_BACKSLASHHELP		"反斜杠转义\n\n\
 \\a\tAlert (BEL, ASCII 7)\n\
-\\b\tBackspace (BS, ASCII 8)\n\
+\\b\t退格 (BS, ASCII 8)\n\
 \\e\tEscape (ESC, ASCII 27 / 1B)\n\
-\\f\tFormfeed (FF, ASCII 12 / 0C)\n\
-\\n\tNewline (LF, ASCII 10 / 0A)\n\
-\\r\tCarriage return (CR, ASCII 13 / 0D)\n\
-\\t\tHorizontal Tab (HT, ASCII 9)\n\
-\\v\tVertical Tab (VT, ASCII 11 / 0B)\n\
-\\ooo\tOctal Value\n\
-\\uHHHH\tHexadecimal Value\n\
-\\xHH\tHexadecimal Value\n\
-\\\\\tBackslash"
+\\f\t换页 (FF, ASCII 12 / 0C)\n\
+\\n\t换行 (LF, ASCII 10 / 0A)\n\
+\\r\t回车 (Carriage return) (CR, ASCII 13 / 0D)\n\
+\\t\t水平制表符 (HT, ASCII 9)\n\
+\\v\t垂直制表符 (VT, ASCII 11 / 0B)\n\
+\\ooo\t八进制值\n\
+\\uHHHH\t十六进制值\n\
+\\xHH\t十六进制值\n\
+\\\\\t反斜杠"
 
-	IDS_REGEXPHELP			"RegExp Syntax (Single Lines Only)\n\n\
-.\tAny character\n\
-^\tStart of a line\n\
-$\tEnd of a line\n\
-\\<\tStart of a word\n\
-\\>\tEnd of a word\n\
-[...]\tA set of characters ([abc]) or a range ([a-z])\n\
-[^...]\tCharacters NOT in the set or range\n\
-\\d\tAny decimal digit\n\
-\\D\tAny non-digit character\n\
-\\s\tAny whitespace character\n\
-\\S\tAny non-whitespace character\n\
-\\w\tAny ""word"" character\n\
-\\W\tAny ""non-word"" character\n\
+	IDS_REGEXPHELP			"正则表达式（RegExp）语法（单行模式）\n\n\
+.\t任何字符\n\
+^\t行起始\n\
+$\t行结束\n\
+\\<\t单词起始\n\
+\\>\t单词结束\n\
+[...]\t字符集合 ([abc]) 或字符范围 ([a-z])\n\
+[^...]\t非集合或范围中的字符\n\
+\\d\t任何十进制数字\n\
+\\D\t任何非数字字符\n\
+\\s\t任何空白字符\n\
+\\S\t任何非空白字符\n\
+\\w\t任何单词字符\n\
+\\W\t任何非单词字符\n\
 \\x\tEscape character with otherwise special meaning\n\
-\\xHH\tCharacter with hexadecimal code HH\n\
-?\tMatches preceding 0 or 1 times\n*\tMatches preceding 0 or more times\n\
-+\tMatches preceding 1 or more times\n\
-*? or +?\tNon greedy matching of quantifiers ""?"" and ""+""\n\
-(\tStart of a region\n\
-)\tEnd of a region\n\
-\\n\tRefers to a region when replacing (n is 1-9)\n\n\
-Experimental Syntax:\n\
-\\h\tStart of a word, according to IsWordStartAt()\n\
-\\H\tEnd of a word, according to IsWordEndAt()\n\
-\\i\tMatches 1 or more characters to the end of a word\n\
-\\i?\tMatches 0 or more characters to the end of a word"
+\\xHH\t十六进制代码 HH 的字符\n\
+?\t匹配 0 或 1 次\n*\t匹配 0 次或多次\n\
++\t匹配 1 次或多次\n\
+*? 或 +?\t指示数量定义 ""?"" 和 ""+"" 做非贪婪匹配\n\
+(\t范围起始\n\
+)\t范围结束\n\
+\\n\t提示替换时的范围 (n 为 1-9)\n\n\
+实验性语法:\n\
+\\h\t单词起始，根据 IsWordStartAt()\n\
+\\H\t单词结束，根据 IsWordEndAt()\n\
+\\i\t匹配 1 个或多个字符到单词结束\n\
+\\i?\t匹配 0 个或多个字符到单词结束"
 
-	IDS_WILDCARDHELP		"Wildcard Search\n\n\
-*\tMatches zero or more characters.\n\
+	IDS_WILDCARDHELP		"通配符搜索\n\n\
+*\t匹配 0 个或多个字符\n\
 ?\tMatches exactly one character. "
 END
 
