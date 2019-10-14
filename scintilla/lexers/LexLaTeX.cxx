@@ -1,4 +1,6 @@
-// Lexer for LaTeX.
+// This file is part of Notepad2.
+// See License.txt for details about distribution and modification.
+//! Lexer for LaTeX.
 
 #include <cstring>
 #include <cassert>
@@ -262,8 +264,6 @@ static bool IsLEnd(Sci_Position line, Accessor &styler) noexcept {
 #define IsEndDoc(line)			IsLEnd(line, styler)
 
 static void FoldLatexDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, LexerWordList, Accessor &styler) {
-	if (styler.GetPropertyInt("fold") == 0)
-		return;
 	const bool foldComment = styler.GetPropertyInt("fold.comment") != 0;
 	const bool foldCompact = styler.GetPropertyInt("fold.compact", 1) != 0;
 

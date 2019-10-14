@@ -25,8 +25,11 @@ C/C++ Source
 	m				Objective C Source File
 	mm				Objective C++ Source File
 	xpm				X11 Pixmap Graphic
+	cu				CUDA Source File
 
 	*.h.in
+
+	[ ] rs			Android RenderScript
 
 C# Source
 	cs
@@ -93,6 +96,8 @@ Ruby Script
 
 	Rakefile		Ruby Makefile
 	Podfile			CocoaPods
+
+	cr				Crystal		https://crystal-lang.org/
 
 SQL Query
 	sql
@@ -240,6 +245,8 @@ GraphViz Dot
 	dot
 	gv
 
+	diag			blockdiag
+
 Groovy Script
 	groovy
 	gvy
@@ -377,6 +384,8 @@ Resource Script
 	rh
 	dlg
 
+Rust Source
+	rs
 
 Scala Script
 	scala

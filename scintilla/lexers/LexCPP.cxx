@@ -1,5 +1,7 @@
-// Lexer for C, C++, C#, Java, Rescouce Script, Asymptote, D, Objective C/C++, PHP
-// JavaScript, JScript, ActionScript, haXe, Groovy, Scala, Jamfile, AWK, IDL/ODL/AIDL
+// This file is part of Notepad2.
+// See License.txt for details about distribution and modification.
+//! Lexer for C, C++, C#, Java, Rescouce Script, Asymptote, D, Objective C/C++, PHP
+//! JavaScript, JScript, ActionScript, haXe, Groovy, Scala, Jamfile, AWK, IDL/ODL/AIDL
 
 #include <cstring>
 #include <cassert>
@@ -378,7 +380,7 @@ static void ColouriseCppDoc(Sci_PositionU startPos, Sci_Position length, int ini
 					|| sc.ch == '*' || sc.ch == '&' || sc.ch == ':')) {
 					bool is_class = false;
 					Sci_PositionU pos = sc.currentPos;
-					const int next_char = IsASpace(sc.ch) ? nextChar : sc.ch;
+					const int next_char = nextChar;
 
 					if (sc.ch == ':' && sc.chNext == ':') { // C++, Java, PHP
 						is_class = true;
@@ -1215,8 +1217,6 @@ static bool IsOpenBraceLine(Sci_Position line, LexAccessor &styler) noexcept {
 }
 
 static void FoldCppDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, LexerWordList, Accessor &styler) {
-	if (styler.GetPropertyInt("fold") == 0)
-		return;
 	const bool foldComment = styler.GetPropertyInt("fold.comment", 1) != 0;
 	const bool foldPreprocessor = styler.GetPropertyInt("fold.preprocessor", 1) != 0;
 	//const bool foldAtElse = styler.GetPropertyInt("fold.at.else", 0) != 0;

@@ -1,9 +1,6 @@
-// Scintilla source code edit control
-/** @file LexFortran.cxx
- ** Lexer for Fortran
- ** Written by Zufu Liu <zufuliu@gmail.com> 2011/09
- **/
-// The License.txt file describes the conditions under which this software may be distributed.
+// This file is part of Notepad2.
+// See License.txt for details about distribution and modification.
+//! Lexer for Fortran
 
 #include <cstdlib>
 #include <cassert>
@@ -169,8 +166,6 @@ static void ColouriseFortranDoc(Sci_PositionU startPos, Sci_Position length, int
 #define StrEqu(str1, str2)		(strcmp(str1, str2) == 0)
 
 static void FoldFortranDoc(Sci_PositionU startPos, Sci_Position length, int /*initStyle*/, LexerWordList, Accessor &styler) {
-	if (styler.GetPropertyInt("fold") == 0)
-		return;
 	const bool foldComment = styler.GetPropertyInt("fold.comment") != 0;
 	const bool foldCompact = styler.GetPropertyInt("fold.compact", 1) != 0;
 

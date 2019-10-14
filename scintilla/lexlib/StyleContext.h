@@ -75,7 +75,7 @@ public:
 	width(0),
 	widthNext(1) {
 		// lexer need enable useUnicode if it wants to detect Unicode identifier (http://www.unicode.org/reports/tr31/)
-		// which requires CharacterCategory from official Scintilla lexlib.
+		// or operator. e.g. using functions from CharacterCategory.
 		if ((useUnicode && styler.Encoding() == encUnicode) || styler.Encoding() == encDBCS) {
 			multiByteAccess = styler.MultiByteAccess();
 		}
@@ -214,11 +214,12 @@ public:
 	Sci_Position GetCurrentLowered(char *s, Sci_PositionU len) const noexcept {
 		return LexGetRangeLowered(styler.GetStartSegment(), currentPos - 1, styler, s, len);
 	}
+
 	int GetNextNSChar() const noexcept {
-		if (!IsSpaceOrTab(ch)) {
+		if (!IsWhiteSpace(ch)) {
 			return ch;
 		}
-		if (!IsSpaceOrTab(chNext)) {
+		if (!IsWhiteSpace(chNext)) {
 			return chNext;
 		}
 		return LexGetNextChar(currentPos + 2, styler);

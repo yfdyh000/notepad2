@@ -1,9 +1,6 @@
-// Scintilla source code edit control
-/** @file LexFSharp.cxx
- ** Lexer for F#
- ** Written by Zufu Liu <zufuliu@gmail.com> 2011/09
- **/
-// The License.txt file describes the conditions under which this software may be distributed.
+// This file is part of Notepad2.
+// See License.txt for details about distribution and modification.
+//! Lexer for F#
 
 #include <cstdlib>
 #include <cassert>
@@ -201,8 +198,6 @@ static constexpr bool IsStreamCommentStyle(int style) noexcept {
 #define IsOpenLine(line)		IsFSLine(line, "open")
 
 static void FoldFSharpDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, LexerWordList, Accessor &styler) {
-	if (styler.GetPropertyInt("fold") == 0)
-		return;
 	//const int lexType = styler.GetPropertyInt("lexer.lang.type", LEX_FSHARP);
 	const bool foldComment = styler.GetPropertyInt("fold.comment", 1) != 0;
 	const bool foldPreprocessor = styler.GetPropertyInt("fold.preprocessor", 1) != 0;

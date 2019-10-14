@@ -2,9 +2,14 @@
 #include "EditStyle.h"
 
 // https://graphviz.org/
+// http://blockdiag.com/en/
+// https://graphviz.gitlab.io/_pages/doc/info/lang.html
 
 static KEYWORDLIST Keywords_DOT = {{
-"node edge graph digraph subgraph strict true false"
+"node edge graph digraph subgraph strict true false "
+
+// blockdiag
+"blockdiag group seqdiag actdiag lane nwdiag network rackdiag rack packetdiag "
 
 , // 1 Type Keyword
 // Node Shape
@@ -51,7 +56,7 @@ static EDITSTYLE Styles_DOT[] = {
 EDITLEXER lexDOT = {
 	SCLEX_GRAPHVIZ, NP2LEX_DOT,
 	EDITLEXER_HOLE(L"GraphViz Dot", Styles_DOT),
-	L"dot; gv",
+	L"dot; gv; diag",
 	&Keywords_DOT,
 	Styles_DOT
 };

@@ -18,7 +18,7 @@ public:
 		extremePosition = 0x7FFFFFFF
 	};
 private:
-	IDocument *pAccess;
+	IDocument * const pAccess;
 	/** @a bufferSize is a trade off between time taken to copy the characters
 	 * and retrieval overhead.
 	 * @a slopSize positions the buffer before the desired position
@@ -29,24 +29,27 @@ private:
 	char buf[bufferSize + 1];
 	Sci_Position startPos;
 	Sci_Position endPos;
-	int codePage;
-	enum EncodingType encodingType;
-	Sci_Position lenDoc;
+	const int codePage;
+	const enum EncodingType encodingType;
+	const Sci_Position lenDoc;
 	unsigned char styleBuf[bufferSize];
 	Sci_Position validLen;
 	Sci_PositionU startSeg;
 	Sci_Position startPosStyling;
-	int documentVersion;
+	const int documentVersion;
 
 	void Fill(Sci_Position position) noexcept {
 		startPos = position - slopSize;
-		if (startPos + bufferSize > lenDoc)
+		if (startPos + bufferSize > lenDoc) {
 			startPos = lenDoc - bufferSize;
-		if (startPos < 0)
+		}
+		if (startPos < 0) {
 			startPos = 0;
+		}
 		endPos = startPos + bufferSize;
-		if (endPos > lenDoc)
+		if (endPos > lenDoc) {
 			endPos = lenDoc;
+		}
 
 		pAccess->GetCharRange(buf, startPos, endPos - startPos);
 		buf[endPos - startPos] = '\0';
@@ -56,7 +59,7 @@ public:
 	explicit LexAccessor(IDocument * pAccess_) noexcept :
 		pAccess(pAccess_), startPos(extremePosition), endPos(0),
 		codePage(pAccess->CodePage()),
-		encodingType(enc8bit),
+		encodingType((codePage == 65001) ? encUnicode : (codePage ? encDBCS : enc8bit)),
 		lenDoc(pAccess->Length()),
 		validLen(0),
 		startSeg(0),
@@ -65,9 +68,6 @@ public:
 		// Prevent warnings by static analyzers about uninitialized buf and styleBuf.
 		buf[0] = 0;
 		styleBuf[0] = 0;
-		if (codePage) {
-			encodingType = (codePage == 65001) ? encUnicode : encDBCS;
-		}
 	}
 	char operator[](Sci_Position position) noexcept {
 		if (position < startPos || position >= endPos) {
@@ -89,6 +89,7 @@ public:
 		}
 		return buf[position - startPos];
 	}
+	[[deprecated]]
 	char SafeGetCharAt(Sci_Position position, char chDefault) noexcept {
 		if (position < startPos || position >= endPos) {
 			Fill(position);
@@ -99,8 +100,8 @@ public:
 		}
 		return buf[position - startPos];
 	}
-	bool IsLeadByte(char ch) const noexcept {
-		return pAccess->IsDBCSLeadByte(ch);
+	bool IsLeadByte(unsigned char ch) const noexcept {
+		return encodingType == encDBCS && ch > 0x80 && pAccess->IsDBCSLeadByte(ch);
 	}
 	constexpr EncodingType Encoding() const noexcept {
 		return encodingType;
@@ -166,8 +167,9 @@ public:
 				return;
 			}
 
-			if (validLen + (pos - startSeg + 1) >= bufferSize)
+			if (validLen + (pos - startSeg + 1) >= bufferSize) {
 				Flush();
+			}
 			const unsigned char attr = static_cast<unsigned char>(chAttr);
 			if (validLen + (pos - startSeg + 1) >= bufferSize) {
 				// Too big for buffer so send directly
@@ -211,6 +213,10 @@ constexpr bool IsSpaceOrTab(int ch) noexcept {
 	return ch == ' ' || ch == '\t';
 }
 
+constexpr bool IsWhiteSpace(int ch) noexcept {
+	return (ch == ' ') || ((ch >= 0x09) && (ch <= 0x0d));
+}
+
 bool IsLexCommentLine(Sci_Position line, LexAccessor &styler, int style) noexcept;
 
 inline bool IsBackslashLine(Sci_Position line, LexAccessor &styler) noexcept {
@@ -250,7 +256,7 @@ inline char LexGetPrevChar(Sci_Position endPos, LexAccessor &styler) noexcept {
 	do {
 		--endPos;
 		const char ch = styler.SafeGetCharAt(endPos);
-		if (!IsSpaceOrTab(ch)) {
+		if (!IsWhiteSpace(ch)) {
 			return ch;
 		}
 	} while (true);
@@ -259,7 +265,7 @@ inline char LexGetPrevChar(Sci_Position endPos, LexAccessor &styler) noexcept {
 inline char LexGetNextChar(Sci_Position startPos, LexAccessor &styler) noexcept {
 	do {
 		const char ch = styler.SafeGetCharAt(startPos);
-		if (!IsSpaceOrTab(ch)) {
+		if (!IsWhiteSpace(ch)) {
 			return ch;
 		}
 		++startPos;

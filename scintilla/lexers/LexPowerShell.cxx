@@ -1,4 +1,6 @@
-// Lexer for PowerShell.
+// This file is part of Notepad2.
+// See License.txt for details about distribution and modification.
+//! Lexer for PowerShell.
 
 #include <cstdlib>
 #include <cassert>
@@ -129,8 +131,6 @@ static void ColourisePowerShellDoc(Sci_PositionU startPos, Sci_Position length, 
 // level store to make it easy to pick up with each increment
 // and to make it possible to fiddle the current level for "} else {".
 static void FoldPowerShellDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, LexerWordList, Accessor &styler) {
-	if (styler.GetPropertyInt("fold") == 0)
-		return;
 	const bool foldComment = styler.GetPropertyInt("fold.comment") != 0;
 	const bool foldCompact = styler.GetPropertyInt("fold.compact", 1) != 0;
 	const bool foldAtElse = styler.GetPropertyInt("fold.at.else", 0) != 0;
